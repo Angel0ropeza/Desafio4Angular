@@ -1,0 +1,55 @@
+<mat-grid-list cols="4" rowHeight="700px">
+  <mat-grid-tile *ngFor="let producto of productos">
+    <div id=""></div>
+      <mat-card class="cartas">
+          <mat-card-header>
+              <mat-card-title>{{ producto.titulo }}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{ producto.imagenURL }}" alt="{{ producto.titulo }}" >
+          <mat-card-content>
+              <p class="cartaPrecio"><strong>PRECIO:</strong> US$ <span>{{ producto.precio }}</span></p>
+              <p class="cartaTipoEnvio"><strong>TIPO DE ENVIO: </strong><span>{{ producto.tipoEnvio }}</span></p>
+          </mat-card-content>
+          <mat-card-actions id="acciones-cartas">
+              <a class="botonesOpciones" href="#contenedorSeleccion">
+                  <button class="btnSeleccionar" id="btn-seleccionar" mat-flat-button color="warn"
+                  (click)="seleccionarProducto(producto)">SELECCIONAR</button>
+              </a>
+              <a class="botonesOpciones" routerLink="/descripcion/{{producto.id}}">
+                <button class="btnSeleccionar" id="btn-seleccionar" mat-flat-button color="warn">IR A DESCRIPCION</button>
+              </a>
+          </mat-card-actions>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<div id="contenedorSeleccion" *ngIf="nombreArticulo != ''">
+  
+
+  <div id="seccionCentral">
+      <ng-container id="informacionA" *ngIf="nombreArticulo != ''">
+          <div class="tNormal" [ngClass]="{'tGrande': precioArticulo > 100, 'tNormal' : precioArticulo <= 99}">
+              <h2 [style.font-size]="precioArticulo > 100 ? 'x-large': 'medium'">{{ nombreArticulo }}</h2>
+              <h5 [style.font-size]="precioArticulo > 100 ? 'x-large': 'medium'">PRECIO: US$ <span>{{ precioArticulo
+                      }}</span></h5>
+              <p [style.font-size]="precioArticulo > 100 ? 'x-large': 'medium'">TIPO DE ENVIO: <span>{{
+                      tipoEnvioArticulo }}</span></p>
+          </div>
+      </ng-container>
+
+      <div id="informacionB" *ngIf="nombreArticulo != ''">
+          <mat-card>
+              <div id="contenedorImg">
+                  <img mat-card-image src="{{ imagenURLarticulo }}" alt="Carta" width="50%" height="500">
+              </div>
+              <mat-card-content>
+                  <span>{{ descriptionArticulo }}</span>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  
+</div>
